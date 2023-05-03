@@ -74,6 +74,10 @@
         <section id="features">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
+                    <div class="col-lg-4">
+                        <!-- Features section device mockup-->
+                        <img src="{% static 'AppMain/assets/img/servicios.jpeg' %}" alt="Servicios">
+                    </div>
                     <div class="col-lg-8 order-lg-1 mb-5 mb-lg-0">
                         <div class="container-fluid px-5">
                             <div class="row gx-5">
@@ -114,14 +118,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 order-lg-0">
-                        <!-- Features section device mockup-->
-                        <img src="{% static 'AppMain/assets/img/servicios.jpeg' %}" alt="Servicios">
-                    </div>
+
                 </div>
             </div>
         </section>
-        <!-- Basic features section-->
+        <!-- Basic features section
         <section class="bg-light">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
@@ -138,31 +139,41 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
         <!-- Call to action section-->
         <section class="cta">
             <div class="cta-content">
                 <div class="container px-5">
-                    <h2 class="text-white display-1 lh-1 mb-4">
-                        Stop waiting.
-                        <br />
-                        Start building.
-                    </h2>
-                    
+                    <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+                        <div class="col-12 col-lg-5">
+                            <h3 class="text-white display-4 lh-1 mb-1">Dirección</h3>
+                            <p class="text-white lead fw-normal mb-5 mb-lg-0">Sanabria 3317<br> CP C1417AZY (CABA)</p>
+                            <br>
+                            <h3 class="text-white display-4 lh-1 mb-1">Contacto</h3>
+                            <p class="text-white lead fw-normal mb-5 mb-lg-0">Cel: 011 6601-8892</p>
+                        </div>
+                        <div class="col-sm-8 col-md-6">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4403.78102214645!2d-58.508938758255766!3d-34.60673499175255!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb7d20f16c93b%3A0x43d4d940595f1f19!2sMoccachino%20Helados!5e0!3m2!1ses-419!2ses!4v1683131037877!5m2!1ses-419!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         <!-- App badge section-->
         <section class="bg-gradient-primary-to-secondary" id="download">
             <div class="container px-5">
-                <h2 class="text-center text-white font-alt mb-4">MOCCACHINO</h2>
+                <h2 class="text-center text-white font-alt mb-4">MOCCACHINO
+                    <br>
+                <a class="text-center text-white font-alt mb-4" href="https://www.instagram.com/heladosmoccachino/">Instagram</a>
+                </h2>
+                
                 <!-- <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                     <a class="me-lg-3 mb-4 mb-lg-0" href="#!"><img class="app-badge" src="assets/img/google-play-badge.svg" alt="..." /></a>
                     <a href="#!"><img class="app-badge" src="assets/img/app-store-badge.svg" alt="..." /></a>
                 </div>-->
             </div>
         </section>
-        <!-- Footer-->
+        <!-- Footer
         <footer class="bg-black text-center py-5">
             <div class="container px-5">
                 <div class="text-white-50 small">
@@ -174,7 +185,7 @@
                     <a href="#!">FAQ</a>
                 </div>
             </div>
-        </footer>
+        </footer>-->
         <!-- Feedback Modal-->
         <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -245,7 +256,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="{% static 'AppMain/js/scripts.js' %}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
