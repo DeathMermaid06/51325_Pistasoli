@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SABORES</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'AppMain/padre.html' %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="display-1 lh-1 mb-3">Sabores</h1>
+<p class="lead fw-normal text-muted mb-5">Una gran variedad de cremas, dulces de leche y chocolates, además de los sabores frutales más naturales y exquisitos para disfrutar en familia y con amigos.</p>
+<div class="d-flex flex-column flex-lg-row align-items-center">
+{% endblock %}
+
+{% block titulo_imagen %}
+<img src="{% static 'AppMain/assets/img/imagenes1.jpeg' %}" width="500" height=auto alt="imagen1">
+{% endblock %}
+
+{% block separador_violeta %}
+<div class="h2 fs-1 text-white mb-4">Sabores que fabricamos</div>
+{% endblock %}
+
+{% block desarrollo %}
+
+{% endblock %}
