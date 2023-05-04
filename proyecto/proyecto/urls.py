@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from AppMain.views import *
+from AppClientes.views import *
 from .views import *
 
 from django.conf import settings
@@ -26,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", inicioAppMain),
     path("AppMain/", include("AppMain.urls")),
+    path("AppClientes/", include("AppClientes.urls")),
+
 
 ]
  
