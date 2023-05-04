@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import *
 
 from .models import *
 
@@ -14,7 +15,20 @@ def facturas(request):
     return render(request, "AppClientes/facturas.html")
 
 def precios(request):
-    return render(request, "AppClientes/precios.html")
+    if request.method == "POST":
+        form = SaboresForm(request.POST)
+        if form.is_valid():
+            sabor = Sabores()
+            sabor.nombre = form.cleaned_data["nombre"]
+            sabor.precio = form.cleaned_data["precio"]
+            sabor.save()
+    else:
+       form = SaboresForm() 
+
+    sabores = Sabores.objects.all()
+    context= {"sabores": sabores, "form": form}
+    return render(request, ("AppClientes/precios.html"), context)
+
 
 def inbox(request):
     return render(request, "AppClientes/inbox.html")
