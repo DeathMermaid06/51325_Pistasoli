@@ -17,6 +17,8 @@
                                     <input type="submit" value="Agregar">
                             </form>
                             <br>
+                            {{ mensaje }}
+                            <br>
 
 
                         <!--
@@ -77,11 +79,11 @@
                                             <td>${{ sabor.precio}}</td>
                                             <td><div class="col-xl-auto col-md-1">
                                                 <div class="card bg-primary text-white mb-4">
-                                                    <a class="card-body" href="#">Editar</a>
+                                                    <a class="card-body" href="{% url 'precioseditar' sabor.id %}">Editar</a>
                                             </div></td>
                                             <td><div class="col-xl-auto col-md-1">
                                                 <div class="card bg-danger text-white mb-4">
-                                                    <a class="card-body" href="#">Eliminar</a>
+                                                    <a class="card-body" href="{% url 'preciosborrar' sabor.id %}">Eliminar</a>
                                                  
                                                 </div>
                                             </div></td>

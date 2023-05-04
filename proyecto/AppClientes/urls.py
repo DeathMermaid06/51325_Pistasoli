@@ -8,7 +8,11 @@ urlpatterns = [
     path('precios/', precios, name="precios"),
     path('inbox/', inbox, name="inbox"),
     path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
+
+    path('preciosborrar/<id>', preciosborrar, name="preciosborrar"),
+    path('precioseditar/<id>', precioseditar, name="precioseditar"),
 ]
+
 
 
 
