@@ -11,6 +11,10 @@ urlpatterns = [
 
     path('preciosborrar/<id>', preciosborrar, name="preciosborrar"),
     path('precioseditar/<id>', precioseditar, name="precioseditar"),
+
+    path('loginregisterC/', loginregisterC, name="loginregisterC"),    
+    path('registerC/', registerC, name="registerC"),    
+
 ]
 
 

@@ -67,3 +67,9 @@ def inbox(request):
 
 def nuevomensaje(request):
     return render(request, "AppClientes/nuevomensaje.html")
+
+def loginregisterC(request):
+    return render(request, "AppClientes/login.html")
+
+def registerC(request):
+    return render(request, "AppClientes/register.html")

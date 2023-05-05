@@ -12,6 +12,3 @@ def about(request):
 
 def sabores(request):
     return render(request, "AppMain/sabores.html")
-
-def ingresar(request):
-    return render(request, "AppMain/loginregister.html")
