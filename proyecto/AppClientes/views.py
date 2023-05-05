@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 from .forms import *
@@ -10,15 +11,19 @@ from .forms import *
 from .models import *
 
 # Create your views here.
+@login_required
 def inicioAppClientes(request):
     return render(request, "AppClientes/index.html")
 
+@login_required
 def pedidos(request):
     return render(request, "AppClientes/pedidos.html")
 
+@login_required
 def facturas(request):
     return render(request, "AppClientes/facturas.html")
 
+@login_required
 def precios(request):
     if request.method == "POST":
         form = SaboresForm(request.POST)
@@ -37,6 +42,7 @@ def precios(request):
 
 #HttpResponseRedirect TENGO QUE USARLO PORQUE ME QUEDA EL ID DEL POST ANTERIOR Y FALLA SI NO LO ENCUENTRA O SOBREESCRIBE EL ID ANTERIOR 
 
+@login_required
 def preciosborrar(request, id):
     sabor=Sabores.objects.get(id=id)
     sabor.delete()
@@ -44,6 +50,7 @@ def preciosborrar(request, id):
     form = SaboresForm()
     return HttpResponseRedirect(reverse('precios'), {"sabores": sabores, "mensaje": "SABOR ELIMINADO CORRECTAMENTE", "form": form})
     
+@login_required    
 def precioseditar(request, id):
     sabor=Sabores.objects.get(id=id)
     if request.method == "POST":
@@ -64,10 +71,11 @@ def precioseditar(request, id):
        return render(request, ("AppClientes/precioseditar.html"), {"form": form})
 
 
-
+@login_required
 def inbox(request):
     return render(request, "AppClientes/inbox.html")
 
+@login_required
 def nuevomensaje(request):
     return render(request, "AppClientes/nuevomensaje.html")
 
