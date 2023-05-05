@@ -7,7 +7,7 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path("", inicioAppClientes, name="InicioAppClientes"),
 
-    path('facturas/', facturas, name="facturas"),
+   
     path('precios/', precios, name="precios"),
     path('inbox/', inbox, name="inbox"),
     path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
@@ -26,6 +26,11 @@ urlpatterns = [
     path('pedidosborrar/<id>', pedidosborrar, name="pedidosborrar"),
     path('pedidosborrarS/<id>', pedidosborrarS, name="pedidosborrarS"),
     path('pedidosagregar', pedidoAgregar, name="pedidosagregar"),
+
+    path('facturas_por_cliente/', vista_superFactura, name="facturas_por_cliente"),
+    path('facturas_super/', vista_superFactura, name="facturas_super"),
+  
+    path('facturasagregar', facturaAgregar, name="facturasagregar"),
 
 ]
 

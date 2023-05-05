@@ -5,19 +5,13 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Facturas de todos los clientes</h1>
-                             
-                        <br>
-                        <br>
-                    
-                            <a style="color: blue;" href="{% url 'facturasagregar' %}">NUEVA FACTURA</a>
-                            <br>
-                            <br>
-                  
+                        <h1 class="mt-4">Facturas</h1>
+                        
+                
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Lista de Facturas
+                                Lista de Facuras de {{ user }}
                             </div>
                             
                             <div class="card-body">
@@ -34,6 +28,7 @@
                                     </thead>
                              
                                     <tbody>
+                                 
                                         {% for factura in facturas %}
                                         <tr>
                                             <td>{{ factura.cliente }}</td>
@@ -44,6 +39,7 @@
                                             <td>{{ factura.fecha }}</td>
                                         </tr>
                                         {% endfor %}
+                                   
                                     </tbody>
                                 </table>
                             

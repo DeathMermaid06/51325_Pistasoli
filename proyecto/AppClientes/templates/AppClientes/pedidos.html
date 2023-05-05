@@ -7,9 +7,6 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Pedidos Totales</h1>
                   
-
-
-
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -31,8 +28,8 @@
                                         {% for pedido in pedidos %}
                                         <tr>
                                             <td>{{ pedido.sabor }}</td>
-                                            <td>${{ pedido.cantidad }}</td>
-                                            <td>${{ pedido.cliente }}</td>
+                                            <td>{{ pedido.cantidad }}</td>
+                                            <td>{{ pedido.cliente }}</td>
                                             <td><div class="col-xl-auto col-md-1">
                                                 <div class="card bg-danger text-white mb-4">
                                                     <a class="card-body" href="{% url 'pedidosborrarS' pedido.id %}">Eliminar</a>

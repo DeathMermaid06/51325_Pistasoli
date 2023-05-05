@@ -18,11 +18,6 @@ def inicioAppClientes(request):
     return render(request, "AppClientes/index.html")
 
 
-
-@login_required
-def facturas(request):
-    return render(request, "AppClientes/facturas.html")
-
 @login_required
 def precios(request):
     if request.method == "POST":
@@ -176,3 +171,39 @@ def pedidosborrarS(request, id):
     form = PedidoForm()
     return HttpResponseRedirect(reverse('pedidos_super'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form})
     
+## FACTURA
+
+@login_required
+def vista_superFactura (request):
+    if request.user.is_superuser:
+        facturas = Factura.objects.all()
+        context= {"facturas": facturas}
+        return render(request, "AppClientes/facturas.html", context)
+    else:
+        varCliente = request.user
+        facturas = Factura.objects.filter(cliente=varCliente)
+        context= {"facturas": facturas}
+        return render(request, "AppClientes/facturas_por_cliente.html", context)
+    
+
+@login_required
+def facturaAgregar(request):
+    if request.method == "POST":
+        form = FacturaForm(request.POST)
+        if form.is_valid():
+            factura = Factura()
+            factura.cliente = form.cleaned_data["cliente"]
+            factura.sabor = form.cleaned_data["sabor"]
+            factura.peso = form.cleaned_data["peso"] 
+            factura.precio = form.cleaned_data["precio"] 
+            factura.save()
+            form = FacturaForm() 
+            return HttpResponseRedirect(reverse('facturasagregar'))
+    else:
+       form = FacturaForm() 
+
+    facturas = Factura.objects.all()
+    context= {"facturas": facturas, "form": form}
+    return render(request, ("AppClientes/facturasagregar.html"), context)
+
+

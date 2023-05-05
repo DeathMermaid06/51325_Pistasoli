@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+import datetime
+from django.db.models import Sum
 
 # Create your models here.
-# Create your models here.
+
 class Cliente(models.Model):
     nombre=models.CharField(max_length=50)
     apellido=models.CharField(max_length=50)
@@ -23,14 +24,19 @@ class Pedido(models.Model):
         return f"{self.sabor} - {self.cantidad}"
 
 class Factura(models.Model):
-    razonsocial=models.CharField(max_length=50)
-    sabor=models.CharField(max_length=50)
-    precio=models.IntegerField()
-    peso=models.FloatField()
-    subtotal=models.FloatField()
-    fecha=models.DateField()
+    cliente = models.CharField(max_length=50)
+    sabor = models.CharField(max_length=50)
+    precio = models.IntegerField()
+    peso = models.IntegerField()
+    fecha = models.DateField(default=datetime.date.today)
+
+    @property
+    def subtotal(self):
+        return self.precio * self.peso
+
     def __str__(self):
-        return f"{self.razonsocial} ${self.subtotal} {self.fecha}"
+        return f"{self.cliente} ${self.subtotal} {self.fecha}"
+    
     
 class Sabores(models.Model):
     nombre=models.CharField(max_length=50)

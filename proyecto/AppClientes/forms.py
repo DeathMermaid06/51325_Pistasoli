@@ -16,12 +16,12 @@ class PedidoForm(forms.Form):
     cliente = forms.ModelChoiceField(queryset=User.objects.all()) #BORRAR MAYYYYBE
 
 class FacturaForm(forms.Form):
-    razonsocial=forms.CharField(max_length=50)
+    cliente=forms.ModelChoiceField(queryset=User.objects.all())
     sabor=forms.CharField(max_length=50)
     precio=forms.IntegerField()
-    peso=forms.FloatField()
-    subtotal=forms.FloatField()
-    fecha=forms.DateField()
+    peso=forms.IntegerField()
+    #subtotal=forms.IntegerField()
+    #fecha=forms.DateField()
 
 class SaboresForm(forms.Form):
     nombre=forms.CharField(max_length=50)
