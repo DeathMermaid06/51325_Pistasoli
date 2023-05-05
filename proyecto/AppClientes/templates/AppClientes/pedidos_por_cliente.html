@@ -6,20 +6,13 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Pedidos</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Nuevo Pedido</li>
-                        </ol>
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                <table>
-                                    {{ form.as_table }}
-                                </table>
-                                    <input type="submit" value="Agregar">
-                            </form>
+                        
+                        <br>
+                        <br>
+                    
+                            <a style="color: blue;" href="{% url 'pedidosagregar' %}">NUEVO PEDIDO</a>
                             <br>
-                            {{ mensaje }}
                             <br>
-
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -32,24 +25,21 @@
                                         <tr>
                                             <th>Sabor</th>
                                             <th>Cantidad</th>
+                                          
                                         </tr>
                                     </thead>
                              
                                     <tbody>
-                                    {% if pedidos_list %}
-                                        {% for p in pedidos_list %}
+                                 
+                                        {% for pedido in pedidos %}
                                         <tr>
-                                            <td>{{ pedido.sabor}}</td>
-                                            <td>${{ pedido.cantidad}}</td>
-                                            <td><div class="col-xl-auto col-md-1">
-                                                <div class="card bg-danger text-white mb-4">
-                                                    <a class="card-body" href="{% url 'preciosborrar' sabor.id %}">Eliminar</a>
-                                                    <a class="card-body" href="{% url 'preciosborrar' sabor.id %}">Editar</a>
-                                                </div>
-                                            </div></td>
+                                            <td>{{ pedido.sabor }}</td>
+                                            <td>${{ pedido.cantidad }}</td>
+                                           
+                                            
                                         </tr>
                                         {% endfor %}
-                                    {% endif %}
+                                   
                                     </tbody>
                                 </table>
                             

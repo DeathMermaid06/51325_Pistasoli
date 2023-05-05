@@ -118,20 +118,61 @@ def loginregisterC(request):
 @login_required
 def vista_super (request):
     if request.user.is_superuser:
-        return render(request, "AppClientes/pedidos.html")
+        pedidos = Pedido.objects.all()
+        context= {"pedidos": pedidos}
+        return render(request, "AppClientes/pedidos.html", context)
     else:
-        return redirect("pedidos_por_cliente")
+        #return redirect("pedidos_por_cliente")
+        varCliente = request.user
+        pedidos = Pedido.objects.filter(cliente=varCliente)
+        context= {"pedidos": pedidos}
+        return render(request, "AppClientes/pedidos_por_cliente.html", context)
 
 
-class PedidoPorUsuario(LoginRequiredMixin, ListView):
-    model = Pedido
-    template_name ='AppClientes/pedido_por_usuario.html'
-    paginate_by = 10 #creo que lo puedo volar esto pq la tabla me lo restringe ya
-        
-    def get_queryset(self):
-        return Pedido.objects.filter(cliente=self.request.user)
+#class PedidoPorUsuario(LoginRequiredMixin, ListView):
+#    model = Pedido
+#    template_name ='AppClientes/pedido_por_usuario.html'
+    
+#    def get_queryset(self):
+#        return Pedido.objects.filter(cliente=self.request.user)
+    
+    
     
 #CRUD de pedidos
 
+@login_required
+def pedidoAgregar(request):
+    if request.method == "POST":
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = Pedido()
+            pedido.sabor = form.cleaned_data["sabor"]
+            pedido.cantidad = form.cleaned_data["cantidad"]
+            pedido.cliente = form.cleaned_data["cliente"] ## Borrar maybe si lo saco de la form
+            pedido.save()
+            form = PedidoForm() 
+            return HttpResponseRedirect(reverse('pedidosagregar'))
+    else:
+       form = PedidoForm() 
+
+    pedidos = Pedido.objects.all()
+    context= {"pedidos": pedidos, "form": form}
+    return render(request, ("AppClientes/pedidosagregar.html"), context)
 
 
+@login_required
+def pedidosborrar(request, id):
+    pedidos=Pedido.objects.get(id=id)
+    pedidos.delete()
+    pedidos = Pedido.objects.all()
+    form = PedidoForm()
+    return HttpResponseRedirect(reverse('pedidos_por_cliente'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form})
+
+@login_required
+def pedidosborrarS(request, id):
+    pedidos=Pedido.objects.get(id=id)
+    pedidos.delete()
+    pedidos = Pedido.objects.all()
+    form = PedidoForm()
+    return HttpResponseRedirect(reverse('pedidos_super'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form})
+    

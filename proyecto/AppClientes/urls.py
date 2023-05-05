@@ -20,9 +20,12 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='AppClientes/logout.html'), name="logout"),
 
 
-    path('pedidos_por_cliente/', PedidoPorUsuario.as_view(template_name='AppClientes/pedidos_por_cliente.html'), name="pedidos_por_cliente"),
+    path('pedidos_por_cliente/', vista_super, name="pedidos_por_cliente"),
     path('pedidos_super/', vista_super, name="pedidos_super"),
   
+    path('pedidosborrar/<id>', pedidosborrar, name="pedidosborrar"),
+    path('pedidosborrarS/<id>', pedidosborrarS, name="pedidosborrarS"),
+    path('pedidosagregar', pedidoAgregar, name="pedidosagregar"),
 
 ]
 

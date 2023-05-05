@@ -13,6 +13,7 @@ class ClienteForm(forms.Form):
 class PedidoForm(forms.Form):
     sabor=forms.CharField(max_length=50)
     cantidad=forms.IntegerField()
+    cliente = forms.ModelChoiceField(queryset=User.objects.all()) #BORRAR MAYYYYBE
 
 class FacturaForm(forms.Form):
     razonsocial=forms.CharField(max_length=50)
