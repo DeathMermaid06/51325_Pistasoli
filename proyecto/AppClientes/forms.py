@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class ClienteForm(forms.Form):
     nombre=forms.CharField(max_length=50)
@@ -22,3 +24,13 @@ class FacturaForm(forms.Form):
 class SaboresForm(forms.Form):
     nombre=forms.CharField(max_length=50)
     precio=forms.IntegerField()
+
+
+class RegistroUsuarioForm(UserCreationForm):
+    email=forms.EmailField(label="mail usuario")
+    password1=forms.CharField(label="constraseña", widget=forms.PasswordInput)
+    password2=forms.CharField(label="repetir constraseña", widget=forms.PasswordInput)
+    class Meta:
+        model=User
+        fields=["username", "email", "password1", "password2"]
+        help_texts = {k:"" for k in fields}

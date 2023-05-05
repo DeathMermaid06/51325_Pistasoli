@@ -71,9 +71,18 @@ def nuevomensaje(request):
     return render(request, "AppClientes/nuevomensaje.html")
 
 
-
 def registerC(request):
-    return render(request, "AppClientes/register.html")
+    if request.method=="POST":
+        form= RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            username= form.cleaned_data.get("username")
+            form.save()
+            return render(request, "AppClientes/register_correcto.html", {"mensaje":f"Usuario {username} creado correctamente"})
+        else:
+            return render(request, "AppClientes/register.html", {"form": form, "mensaje":"Error al crear el usuario"})
+    else:
+        form= RegistroUsuarioForm()
+        return render(request, "AppClientes/register.html", {"form": form})
 
 
 def loginregisterC(request):
