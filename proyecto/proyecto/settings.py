@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+#https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Sessions [CONFIGURACION DE SESIONES]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

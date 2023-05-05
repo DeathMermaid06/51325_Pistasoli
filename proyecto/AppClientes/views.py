@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 from .forms import *
@@ -15,9 +17,7 @@ from .models import *
 def inicioAppClientes(request):
     return render(request, "AppClientes/index.html")
 
-@login_required
-def pedidos(request):
-    return render(request, "AppClientes/pedidos.html")
+
 
 @login_required
 def facturas(request):
@@ -112,9 +112,26 @@ def loginregisterC(request):
     else:
         form=AuthenticationForm()
         return render(request, "AppClientes/login.html", {"form": form})
-    
 
+
+#me fijo si es superuser y muestro todo. Sino solo muestro los resultados del cliente en particular
+@login_required
+def vista_super (request):
+    if request.user.is_superuser:
+        return render(request, "AppClientes/pedidos.html")
+    else:
+        return redirect("pedidos_por_cliente")
+
+
+class PedidoPorUsuario(LoginRequiredMixin, ListView):
+    model = Pedido
+    template_name ='AppClientes/pedido_por_usuario.html'
+    paginate_by = 10 #creo que lo puedo volar esto pq la tabla me lo restringe ya
+        
+    def get_queryset(self):
+        return Pedido.objects.filter(cliente=self.request.user)
     
-    
-    
+#CRUD de pedidos
+
+
 

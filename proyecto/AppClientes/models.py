@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 # Create your models here.
@@ -11,9 +13,12 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
+#https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Authentication
+
 class Pedido(models.Model):
     sabor=models.CharField(max_length=50)
     cantidad=models.IntegerField()
+    cliente = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     def __str__(self):
         return f"{self.sabor} - {self.cantidad}"
 
