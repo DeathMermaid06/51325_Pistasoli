@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
+
 from .forms import *
 
 from .models import *
@@ -103,6 +104,9 @@ def loginregisterC(request):
     else:
         form=AuthenticationForm()
         return render(request, "AppClientes/login.html", {"form": form})
+    
+
+    
     
     
 
