@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 from .forms import *
 
@@ -68,8 +70,30 @@ def inbox(request):
 def nuevomensaje(request):
     return render(request, "AppClientes/nuevomensaje.html")
 
-def loginregisterC(request):
-    return render(request, "AppClientes/login.html")
+
 
 def registerC(request):
     return render(request, "AppClientes/register.html")
+
+
+def loginregisterC(request):
+    if request.method=="POST":
+        form=AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usu=info["username"]
+            clave=info["password"]
+            usuario=authenticate(username=usu, password=clave) 
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, "AppClientes/index.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
+            else:
+                return render(request, "AppClientes/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+        else:
+            return render(request, "AppClientes/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+    else:
+        form=AuthenticationForm()
+        return render(request, "AppClientes/login.html", {"form": form})
+    
+    
+

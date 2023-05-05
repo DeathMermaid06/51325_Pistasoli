@@ -13,7 +13,11 @@ urlpatterns = [
     path('precioseditar/<id>', precioseditar, name="precioseditar"),
 
     path('loginregisterC/', loginregisterC, name="loginregisterC"),    
-    path('registerC/', registerC, name="registerC"),    
+    path('registerC/', registerC, name="registerC"),
+   
+    
+
+  
 
 ]
 
