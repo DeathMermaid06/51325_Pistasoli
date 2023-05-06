@@ -38,9 +38,9 @@
                                         <tr>
                                             <td>{{ factura.cliente }}</td>
                                             <td>{{ factura.sabor }}</td>
-                                            <td>{{ factura.precio }}</td>
+                                            <td>${{ factura.precio }}</td>
                                             <td>{{ factura.peso }}</td>
-                                            <td>{{ factura.subtotal }}</td>
+                                            <td>${{ factura.subtotal }}</td>
                                             <td>{{ factura.fecha }}</td>
                                         </tr>
                                         {% endfor %}

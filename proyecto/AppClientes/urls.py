@@ -32,6 +32,9 @@ urlpatterns = [
   
     path('facturasagregar', facturaAgregar, name="facturasagregar"),
 
+    path('perfil', perfil, name="perfil"),
+    path('perfileditar', perfilEditar, name="perfileditar"),
+
 ]
 
 

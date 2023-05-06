@@ -1,0 +1,36 @@
+{% extends 'AppClientes/padre.html' %}
+{% load static %}
+
+            {% block contenido %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Perfil de {{ user }}</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Perfil</li>
+                        </ol>
+                        <td><div class="col-xl-auto col-md-1">
+                            <div class="card bg-primary text-white mb-4">
+                                <a class="card-body" href="{% url 'perfileditar' %}">Editar</a>
+                        </div></td>
+
+
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                
+                                {{ form.as_table }}
+
+
+
+                                
+                            </form>
+                            <br>
+                            {{ mensaje }}
+                            <br>
+
+                        </div> 
+                    </div>
+                </main>
+                {% endblock %}
+                
+           

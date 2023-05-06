@@ -207,3 +207,38 @@ def facturaAgregar(request):
     return render(request, ("AppClientes/facturasagregar.html"), context)
 
 
+#### PERFILES
+
+@login_required
+def perfil(request):
+    usuario=request.user
+    
+    context={"usuarios": usuario}
+    return render(request, "AppClientes/perfil.html", context)
+
+#class perfil(LoginRequiredMixin, ListView):
+#    model = User
+#    template_name ='AppClientes/perfil.html'
+#    return render (User.objects.all())
+
+
+
+@login_required
+def perfilEditar(request):
+    usuario=request.user
+    if request.method=="POST":
+        form=UserEditForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usuario.email=info["email"]
+            usuario.password1=info["password1"]
+            usuario.password2=info["password2"]
+            usuario.first_name=info["first_name"]
+            usuario.last_name=info["last_name"]
+            usuario.save()
+            return render(request, "AppClientes/perfil.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
+        else:
+            return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username})
+    else:
+        form=UserEditForm(instance=usuario)
+        return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username})
