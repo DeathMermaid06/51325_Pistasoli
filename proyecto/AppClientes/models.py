@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-from django.db.models import Sum
+
 
 # Create your models here.
 
@@ -53,3 +53,7 @@ class Mensaje(models.Model):
 
     def __str__(self):
         return f"{self.fecha} - {self.texto} - {self.receptor} - {self.emisor}"
+    
+class Avatar(models.Model):
+    imagen=models.ImageField(upload_to="avatars")
+    user=models.ForeignKey(User, on_delete=models.CASCADE)

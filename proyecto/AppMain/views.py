@@ -12,3 +12,6 @@ def about(request):
 
 def sabores(request):
     return render(request, "AppMain/sabores.html")
+
+def pages(request):
+    return render(request, "AppMain/pages.html")

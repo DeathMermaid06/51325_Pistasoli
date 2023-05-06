@@ -5,6 +5,7 @@ urlpatterns = [
     path("", inicioAppMain, name="InicioAppMain"),
     path('about/', about, name="about"),
     path('sabores/', sabores, name="sabores"),
+    path('pages/', pages, name="pages"),
 
 ]
 
