@@ -11,10 +11,24 @@
 <img src="{% static 'AppMain/assets/img/elaboracion.jpeg' %}" width="500" height=auto pythonalt="elaboracion">
 {% endblock %}
 
-{% block separador_violeta %}
-<div class="h2 fs-1 text-white mb-4">Promociones</div>
-{% endblock %}
 
-{% block desarrollo %}
-
+{% block direccion %}
+<section class="cta">
+    <div class="cta-content">
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+                <div class="col-12 col-lg-5">
+                    <h3 class="text-white display-4 lh-1 mb-1">Dirección</h3>
+                    <p class="text-white lead fw-normal mb-5 mb-lg-0">Sanabria 3317<br> CP C1417AZY (CABA)</p>
+                    <br>
+                    <h3 class="text-white display-4 lh-1 mb-1">Contacto</h3>
+                    <p class="text-white lead fw-normal mb-5 mb-lg-0">Cel: 011 6601-8892</p>
+                </div>
+                <div class="col-sm-8 col-md-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4403.78102214645!2d-58.508938758255766!3d-34.60673499175255!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb7d20f16c93b%3A0x43d4d940595f1f19!2sMoccachino%20Helados!5e0!3m2!1ses-419!2ses!4v1683131037877!5m2!1ses-419!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

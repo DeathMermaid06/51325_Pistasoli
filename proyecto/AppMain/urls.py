@@ -7,6 +7,8 @@ urlpatterns = [
     path('sabores/', sabores, name="sabores"),
     path('pages/', pages, name="pages"),
 
+    
+
 ]
 
 
