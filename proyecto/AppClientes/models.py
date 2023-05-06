@@ -43,3 +43,13 @@ class Sabores(models.Model):
     precio=models.IntegerField()
     def __str__(self):
         return f"{self.nombre} ${self.precio}"
+    
+
+class Mensaje(models.Model):
+    emisor=models.ForeignKey(User, on_delete=models.CASCADE)
+    receptor=models.CharField(max_length=50)
+    texto=models.CharField(max_length=500)
+    fecha = models.DateField(default=datetime.date.today)
+
+    def __str__(self):
+        return f"{self.fecha} - {self.texto} - {self.receptor} - {self.emisor}"

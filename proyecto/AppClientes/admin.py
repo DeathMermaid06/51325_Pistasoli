@@ -5,6 +5,8 @@ admin.site.register(Cliente)
 #admin.site.register(Pedido)
 admin.site.register(Factura)
 admin.site.register(Sabores)
+admin.site.register(Mensaje)
+
 
 @admin.register(Pedido)
 class Pedido(admin.ModelAdmin):

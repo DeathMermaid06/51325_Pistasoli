@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import *
 
 
 class ClienteForm(forms.Form):
@@ -48,3 +49,14 @@ class UserEditForm(UserCreationForm):
         model=User
         fields=["email", "password1", "password2", "first_name", "last_name"]
         help_texts = {k:"" for k in fields}
+
+class MensajeForm(forms.Form):
+    receptor=forms.ModelChoiceField(queryset=User.objects.all())
+    texto=forms.CharField(max_length=500)
+    
+    class Meta:
+        model=User
+        fields=["receptor", "texto"]
+        help_texts = {k:"" for k in fields}
+
+

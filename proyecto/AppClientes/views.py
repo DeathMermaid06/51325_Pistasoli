@@ -66,14 +66,6 @@ def precioseditar(request, id):
        return render(request, ("AppClientes/precioseditar.html"), {"form": form})
 
 
-@login_required
-def inbox(request):
-    return render(request, "AppClientes/inbox.html")
-
-@login_required
-def nuevomensaje(request):
-    return render(request, "AppClientes/nuevomensaje.html")
-
 
 def registerC(request):
     if request.method=="POST":
@@ -242,3 +234,35 @@ def perfilEditar(request):
     else:
         form=UserEditForm(instance=usuario)
         return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username})
+    
+
+#####  MENSAJERIA
+
+
+@login_required
+def verInbox(request):
+    return render(request, "AppClientes/inbox.html")
+
+@login_required
+def nuevomensaje(request):
+    if request.method == "POST":
+        form = MensajeForm(request.POST)
+        if form.is_valid():
+            mensaje = Mensaje()
+            mensaje.emisor = request.user
+            mensaje.receptor = form.cleaned_data["receptor"]
+            mensaje.texto = form.cleaned_data["texto"]
+            mensaje.save()
+            return render(request, "AppClientes/inbox.html", {"mensaje": "Mensaje enviado correctamente"})
+        else:
+            return render(request, "AppClientes/nuevomensaje.html", {"form": form})
+    else:
+        form = MensajeForm()
+        return render(request, "AppClientes/nuevomensaje.html", {"form": form})
+
+
+    
+
+@login_required
+def verMensaje(request):
+    return render(request, "AppClientes/vermensaje.html")

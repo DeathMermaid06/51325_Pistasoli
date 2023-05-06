@@ -9,8 +9,6 @@ urlpatterns = [
 
    
     path('precios/', precios, name="precios"),
-    path('inbox/', inbox, name="inbox"),
-    path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
 
     path('preciosborrar/<id>', preciosborrar, name="preciosborrar"),
     path('precioseditar/<id>', precioseditar, name="precioseditar"),
@@ -25,15 +23,21 @@ urlpatterns = [
   
     path('pedidosborrar/<id>', pedidosborrar, name="pedidosborrar"),
     path('pedidosborrarS/<id>', pedidosborrarS, name="pedidosborrarS"),
-    path('pedidosagregar', pedidoAgregar, name="pedidosagregar"),
+    #
+    path('pedidosagregar/', pedidoAgregar, name="pedidosagregar"),
 
     path('facturas_por_cliente/', vista_superFactura, name="facturas_por_cliente"),
     path('facturas_super/', vista_superFactura, name="facturas_super"),
-  
-    path('facturasagregar', facturaAgregar, name="facturasagregar"),
+  ##
+    path('facturasagregar/', facturaAgregar, name="facturasagregar"),
 
-    path('perfil', perfil, name="perfil"),
-    path('perfileditar', perfilEditar, name="perfileditar"),
+    path('perfil/', perfil, name="perfil"),
+    path('perfileditar/', perfilEditar, name="perfileditar"),
+
+    path('inbox/', verInbox, name="inbox"),
+    path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
+    path('vermensaje/', verMensaje, name="vermensaje"),    
+
 
 ]
 
