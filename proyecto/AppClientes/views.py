@@ -15,9 +15,19 @@ from .forms import *
 from .models import *
 
 # Create your views here.
+
+
+def verAvatar(request):
+    avatares=Avatar.objects.filter(user=request.user.id)
+    if len(avatares)!=0:
+        return avatares[0].imagen.url
+    else:
+        return "/media/avatars/favicon.ico"
+  
+
 @login_required
 def inicioAppClientes(request):
-    return render(request, "AppClientes/index.html")
+    return render(request, "AppClientes/index.html", {"avatar":verAvatar(request)})
 
 
 @login_required
