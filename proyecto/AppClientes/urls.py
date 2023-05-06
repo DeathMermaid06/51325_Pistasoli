@@ -34,9 +34,10 @@ urlpatterns = [
     path('perfil/', perfil, name="perfil"),
     path('perfileditar/', perfilEditar, name="perfileditar"),
 
-    path('inbox/', verInbox, name="inbox"),
+    path('inbox/', verInbox.as_view(), name="inbox"),
+    #path('inbox/', verInbox, name="inbox"),
     path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
-    path('vermensaje/', verMensaje, name="vermensaje"),    
+    path('vermensaje/<pk>', verMensaje.as_view(), name="vermensaje"),    
 
 
 ]

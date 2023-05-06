@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -35,7 +37,7 @@ def precios(request):
     context= {"sabores": sabores, "form": form}
     return render(request, ("AppClientes/precios.html"), context)
 
-#HttpResponseRedirect TENGO QUE USARLO PORQUE ME QUEDA EL ID DEL POST ANTERIOR Y FALLA SI NO LO ENCUENTRA O SOBREESCRIBE EL ID ANTERIOR 
+#HttpResponseRedirect TENGO QUE USARLO PORQUE ME QUEDA EL ID DEL POST ANTERIOR Y FALLA SI NO LO ENCUENTRA O SOBREESCRIBE EL ID ANTERIOR (creeeeeo que podria haber usado reverselazy)
 
 @login_required
 def preciosborrar(request, id):
@@ -239,9 +241,7 @@ def perfilEditar(request):
 #####  MENSAJERIA
 
 
-@login_required
-def verInbox(request):
-    return render(request, "AppClientes/inbox.html")
+
 
 @login_required
 def nuevomensaje(request):
@@ -253,16 +253,19 @@ def nuevomensaje(request):
             mensaje.receptor = form.cleaned_data["receptor"]
             mensaje.texto = form.cleaned_data["texto"]
             mensaje.save()
-            return render(request, "AppClientes/inbox.html", {"mensaje": "Mensaje enviado correctamente"})
+            return render(request, "AppClientes/nuevomensaje.html", {"mensaje": "Mensaje enviado correctamente"})
         else:
             return render(request, "AppClientes/nuevomensaje.html", {"form": form})
     else:
         form = MensajeForm()
         return render(request, "AppClientes/nuevomensaje.html", {"form": form})
 
+class verInbox(LoginRequiredMixin, ListView):
+    model=Mensaje
+    template_name="AppClientes/inbox.html"
+        
 
-    
+class verMensaje(LoginRequiredMixin, DetailView):
+    model=Mensaje
+    template_name="AppClientes/vermensaje.html"
 
-@login_required
-def verMensaje(request):
-    return render(request, "AppClientes/vermensaje.html")
