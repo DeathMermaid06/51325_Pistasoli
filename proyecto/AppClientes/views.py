@@ -45,7 +45,7 @@ def precios(request):
        form = SaboresForm() 
 
     sabores = Sabores.objects.all()
-    context= {"sabores": sabores, "form": form}
+    context= {"sabores": sabores, "form": form, "avatar":verAvatar(request)}
     return render(request, ("AppClientes/precios.html"), context)
 
 #HttpResponseRedirect TENGO QUE USARLO PORQUE ME QUEDA EL ID DEL POST ANTERIOR Y FALLA SI NO LO ENCUENTRA O SOBREESCRIBE EL ID ANTERIOR (creeeeeo que podria haber usado reverselazy)
@@ -56,7 +56,7 @@ def preciosborrar(request, id):
     sabor.delete()
     sabores = Sabores.objects.all()
     form = SaboresForm()
-    return HttpResponseRedirect(reverse('precios'), {"sabores": sabores, "mensaje": "SABOR ELIMINADO CORRECTAMENTE", "form": form})
+    return HttpResponseRedirect(reverse('precios'), {"sabores": sabores, "mensaje": "SABOR ELIMINADO CORRECTAMENTE", "form": form, "avatar":verAvatar(request)})
     
 @login_required    
 def precioseditar(request, id):
@@ -70,13 +70,13 @@ def precioseditar(request, id):
             sabor.save()
             form = SaboresForm() 
             sabores = Sabores.objects.all()
-            return HttpResponseRedirect(reverse('precios'), {"sabores": sabores, "mensaje": "SABOR EDITADO CORRECTAMENTE", "form": form})
+            return HttpResponseRedirect(reverse('precios'), {"sabores": sabores, "mensaje": "SABOR EDITADO CORRECTAMENTE", "form": form, "avatar":verAvatar(request)})
         else:
             form = SaboresForm() 
     else:
        form = SaboresForm(initial={"nombre": sabor.nombre, "precio": sabor.precio})
 
-       return render(request, ("AppClientes/precioseditar.html"), {"form": form})
+       return render(request, ("AppClientes/precioseditar.html"), {"form": form, "avatar":verAvatar(request)})
 
 
 
@@ -104,7 +104,7 @@ def loginregisterC(request):
             usuario=authenticate(username=usu, password=clave) 
             if usuario is not None:
                 login(request, usuario)
-                return render(request, "AppClientes/index.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
+                return render(request, "AppClientes/index.html", {"mensaje":f"Usuario {usu} logueado correctamente", "avatar":verAvatar(request)})
             else:
                 return render(request, "AppClientes/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
         else:
@@ -119,13 +119,13 @@ def loginregisterC(request):
 def vista_super (request):
     if request.user.is_superuser:
         pedidos = Pedido.objects.all()
-        context= {"pedidos": pedidos}
+        context= {"pedidos": pedidos, "avatar":verAvatar(request)}
         return render(request, "AppClientes/pedidos.html", context)
     else:
         #return redirect("pedidos_por_cliente")
         varCliente = request.user
         pedidos = Pedido.objects.filter(cliente=varCliente)
-        context= {"pedidos": pedidos}
+        context= {"pedidos": pedidos, "avatar":verAvatar(request)}
         return render(request, "AppClientes/pedidos_por_cliente.html", context)
 
 
@@ -151,12 +151,13 @@ def pedidoAgregar(request):
             pedido.cliente = form.cleaned_data["cliente"] ## Borrar maybe si lo saco de la form
             pedido.save()
             form = PedidoForm() 
-            return HttpResponseRedirect(reverse('pedidosagregar'))
+            context={"avatar":verAvatar(request)}
+            return HttpResponseRedirect(reverse('pedidosagregar'), context)
     else:
        form = PedidoForm() 
 
     pedidos = Pedido.objects.all()
-    context= {"pedidos": pedidos, "form": form}
+    context= {"pedidos": pedidos, "form": form, "avatar":verAvatar(request)}
     return render(request, ("AppClientes/pedidosagregar.html"), context)
 
 
@@ -166,7 +167,7 @@ def pedidosborrar(request, id):
     pedidos.delete()
     pedidos = Pedido.objects.all()
     form = PedidoForm()
-    return HttpResponseRedirect(reverse('pedidos_por_cliente'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form})
+    return HttpResponseRedirect(reverse('pedidos_por_cliente'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form, "avatar":verAvatar(request)})
 
 @login_required
 def pedidosborrarS(request, id):
@@ -174,7 +175,7 @@ def pedidosborrarS(request, id):
     pedidos.delete()
     pedidos = Pedido.objects.all()
     form = PedidoForm()
-    return HttpResponseRedirect(reverse('pedidos_super'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form})
+    return HttpResponseRedirect(reverse('pedidos_super'), {"pedidos": pedidos, "mensaje": "PEDIDO ELIMINADO CORRECTAMENTE", "form": form, "avatar":verAvatar(request)})
     
 ## FACTURA
 
@@ -182,12 +183,12 @@ def pedidosborrarS(request, id):
 def vista_superFactura (request):
     if request.user.is_superuser:
         facturas = Factura.objects.all()
-        context= {"facturas": facturas}
+        context= {"facturas": facturas, "avatar":verAvatar(request)}
         return render(request, "AppClientes/facturas.html", context)
     else:
         varCliente = request.user
         facturas = Factura.objects.filter(cliente=varCliente)
-        context= {"facturas": facturas}
+        context= {"facturas": facturas, "avatar":verAvatar(request)}
         return render(request, "AppClientes/facturas_por_cliente.html", context)
     
 
@@ -203,12 +204,13 @@ def facturaAgregar(request):
             factura.precio = form.cleaned_data["precio"] 
             factura.save()
             form = FacturaForm() 
-            return HttpResponseRedirect(reverse('facturasagregar'))
+            context={"avatar":verAvatar(request)}
+            return HttpResponseRedirect(reverse('facturasagregar'), context)
     else:
        form = FacturaForm() 
 
     facturas = Factura.objects.all()
-    context= {"facturas": facturas, "form": form}
+    context= {"facturas": facturas, "form": form, "avatar":verAvatar(request)}
     return render(request, ("AppClientes/facturasagregar.html"), context)
 
 
@@ -218,7 +220,7 @@ def facturaAgregar(request):
 def perfil(request):
     usuario=request.user
     
-    context={"usuarios": usuario}
+    context={"usuarios": usuario, "avatar":verAvatar(request)}
     return render(request, "AppClientes/perfil.html", context)
 
 #class perfil(LoginRequiredMixin, ListView):
@@ -241,12 +243,12 @@ def perfilEditar(request):
             usuario.first_name=info["first_name"]
             usuario.last_name=info["last_name"]
             usuario.save()
-            return render(request, "AppClientes/perfil.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
+            return render(request, "AppClientes/perfil.html", {"mensaje":f"Usuario {usuario.username} editado correctamente", "avatar":verAvatar(request)})
         else:
-            return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username})
+            return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username, "avatar":verAvatar(request)})
     else:
         form=UserEditForm(instance=usuario)
-        return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username})
+        return render(request, "AppClientes/perfileditar.html", {"form": form, "nombreusuario":usuario.username, "avatar":verAvatar(request)})
     
 
 #####  MENSAJERIA
@@ -264,16 +266,18 @@ def nuevomensaje(request):
             mensaje.receptor = form.cleaned_data["receptor"]
             mensaje.texto = form.cleaned_data["texto"]
             mensaje.save()
-            return render(request, "AppClientes/nuevomensaje.html", {"mensaje": "Mensaje enviado correctamente"})
+            return render(request, "AppClientes/nuevomensaje.html", {"mensaje": "Mensaje enviado correctamente", "avatar":verAvatar(request)})
         else:
-            return render(request, "AppClientes/nuevomensaje.html", {"form": form})
+            return render(request, "AppClientes/nuevomensaje.html", {"form": form, "avatar":verAvatar(request)})
     else:
         form = MensajeForm()
-        return render(request, "AppClientes/nuevomensaje.html", {"form": form})
+        return render(request, "AppClientes/nuevomensaje.html", {"form": form, "avatar":verAvatar(request)})
+
 
 class verInbox(LoginRequiredMixin, ListView):
     model=Mensaje
     template_name="AppClientes/inbox.html"
+ 
         
 
 class verMensaje(LoginRequiredMixin, DetailView):
