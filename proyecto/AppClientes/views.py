@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import *
 
 from .models import *
+from AppMain.models import *
 
 # Create your views here.
 
@@ -278,4 +279,27 @@ class verInbox(LoginRequiredMixin, ListView):
 class verMensaje(LoginRequiredMixin, DetailView):
     model=Mensaje
     template_name="AppClientes/vermensaje.html"
+
+
+######################################################################
+
+
+@login_required
+def agregarAvatar(request):
+    if request.method=="POST":
+        form=AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])#antes de guardarlo, tengo q hacer algo
+            
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if len(avatarViejo)>0:
+                avatarViejo[0].delete()
+            avatar.save()
+            return render(request, "AppCoder/inicio.html", {"mensaje":f"Avatar agregado correctamente", "avatar":verAvatar(request)})
+        else:
+            return render(request, "AppCoder/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
+    else:
+        form=AvatarForm()
+        return render(request, "AppCoder/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":verAvatar(request)})
+    
 

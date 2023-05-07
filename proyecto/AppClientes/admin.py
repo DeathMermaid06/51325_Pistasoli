@@ -9,6 +9,7 @@ admin.site.register(Mensaje)
 admin.site.register(Avatar)
 
 
+
 #@admin.register(Pedido)
 #class Pedido(admin.ModelAdmin):
 #    pass

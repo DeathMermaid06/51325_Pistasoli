@@ -60,3 +60,9 @@ class MensajeForm(forms.Form):
         help_texts = {k:"" for k in fields}
 
 
+############ AVATAR
+class AvatarForm(forms.Form):
+    imagen=forms.ImageField(label="Imagen")
+
+
+
