@@ -5,7 +5,7 @@ from .models import *
 
 
 class ClienteForm(forms.Form):
-    nombre=forms.CharField(max_length=50)
+    nombre=forms.ModelChoiceField(queryset=User.objects.all())
     apellido=forms.CharField(max_length=50)
     telefono=forms.IntegerField()
     razonsocial=forms.CharField(max_length=50)

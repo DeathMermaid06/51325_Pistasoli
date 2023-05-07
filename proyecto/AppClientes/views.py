@@ -216,12 +216,15 @@ def facturaAgregar(request):
 
 #### PERFILES
 
+
+
+
 @login_required
 def perfil(request):
-    usuario=request.user
-    
-    context={"usuarios": usuario, "avatar":verAvatar(request)}
-    return render(request, "AppClientes/perfil.html", context)
+        varCliente=request.user
+        usuarios=User.objects.filter(username=varCliente)
+        context={"usuarios": usuarios, "avatar":verAvatar(request)}
+        return render(request, "AppClientes/perfil.html", context)
 
 #class perfil(LoginRequiredMixin, ListView):
 #    model = User
@@ -293,17 +296,17 @@ def agregarAvatar(request):
     if request.method=="POST":
         form=AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])#antes de guardarlo, tengo q hacer algo
+            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
             
             avatarViejo=Avatar.objects.filter(user=request.user)
             if len(avatarViejo)>0:
                 avatarViejo[0].delete()
             avatar.save()
-            return render(request, "AppCoder/inicio.html", {"mensaje":f"Avatar agregado correctamente", "avatar":verAvatar(request)})
+            return render(request, "AppClientes/index.html", {"mensaje":f"Avatar agregado correctamente", "avatar":verAvatar(request)})
         else:
-            return render(request, "AppCoder/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
+            return render(request, "AppClientes/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
     else:
         form=AvatarForm()
-        return render(request, "AppCoder/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":verAvatar(request)})
+        return render(request, "AppClientes/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":verAvatar(request)})
     
 

@@ -6,29 +6,49 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Perfil de {{ user }}</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Perfil</li>
-                        </ol>
-                        <td><div class="col-xl-auto col-md-1">
-                            <div class="card bg-primary text-white mb-4">
-                                <a class="card-body" href="{% url 'perfileditar' %}">Editar</a>
-                        </div></td>
-
-
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                
-                                {{ form.as_table }}
-
-
-
-                                
-                            </form>
+                             
+                        <br>
+                        <br>
+                    
+                            <a style="color: blue;" href="{% url 'perfileditar' %}">Editar</a>
+                            <a style="color: blue;" href="{% url 'agregarAvatar' %}">Agregar Avatar</a>
                             <br>
-                            {{ mensaje }}
                             <br>
+                  
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Perfil
+                            </div>
+                            
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>email</th>
+                                            <th>nombre</th>
+                                            <th>apellido</th>
 
-                        </div> 
+                                        </tr>
+                                    </thead>
+                             
+                                    <tbody>
+                                        {% for usuario in usuarios %}
+                                        <tr>
+                                            <td>{{ usuario.email }}</td>
+                                            <td>{{ usuario.first_name }}</td>
+                                            <td>{{ usuario.last_name }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                       
+                                        <br>
+                                        {{ mensaje }}
+                                        <br>
+                                    </tbody>
+                                </table>
+                            
+                            </div>
+                        </div>
                     </div>
                 </main>
                 {% endblock %}

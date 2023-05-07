@@ -39,6 +39,8 @@ urlpatterns = [
     path('nuevomensaje/', nuevomensaje, name="nuevomensaje"),
     path('vermensaje/<pk>', verMensaje.as_view(), name="vermensaje"),    
 
+    path('agregarAvatar/', agregarAvatar, name='agregarAvatar')
+
 
 ]
 
